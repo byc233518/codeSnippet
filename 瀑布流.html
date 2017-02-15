@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        #box{
+            width: 90%;
+            margin: 20px auto;
+        }
+        #box ul{
+            list-style: none;
+            float: left;
+            width: 24%;
+            margin: 5px;
+        }
+        #box ul img{
+            width: 100%;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <ul></ul>
+        <ul></ul>
+        <ul></ul>
+        <ul></ul>
+    </div>
+    <script type="text/javascript">
+        var ulArr = document.querySelectorAll("ul");
+        //count表示一共有多少张图片
+        function createImg(count){
+            for(var i = 0; i < count; i++){
+                //创建图片和li
+                var img = document.createElement("img");
+                //根据图片下标来命名方便加载图片
+                img.src = "img/img"+i+".jpeg";
+                //每创建一个img就创建一个li
+                var li = document.createElement("li");
+                //li包裹img图片
+                li.appendChild(img);
+                //假设一个最短的ul
+                var minHeightUl = ulArr[0];
+                //循环四个ul的长度
+                for (var j = 0 ;j < ulArr.length;j++){
+                    //如果那个li的高度最短
+                    if (minHeightUl.offsetHeight > ulArr[j].offsetHeight) {
+                        //当前最短的li赋值给minHeightUl
+                        minHeightUl = ulArr[j];
+                    }
+                }
+                //在最短的ul中插入li
+                minHeightUl.appendChild(li);
+            }
+        }
+        createImg(38)
+    </script>
+</body>
+</html>

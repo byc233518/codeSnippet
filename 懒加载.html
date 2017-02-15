@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title></title>
+        <style type="text/css">
+            *{
+                padding: 0;
+                margin: 0;
+            }
+
+            ul,li{
+                list-style: none;
+            }
+
+            img{
+                width: 100%;
+                height: 360px;
+                /* 以下样式是为了做渐变效果 */
+                opacity: 0;
+                transition: opacity 3s;
+            }
+
+            img[src]{
+                opacity: 1;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <ul>
+            <li><img alt="" data-src="img/img1.jpeg"></li>
+                    <li><img alt="" data-src="img/img2.jpeg"></li>
+                    <li><img alt="" data-src="img/img3.jpeg"></li>
+                    <li><img alt="" data-src="img/img4.jpeg"></li>
+                    <li><img alt="" data-src="img/img5.jpeg"></li>
+                    <li><img alt="" data-src="img/img6.jpeg"></li>
+                    <li><img alt="" data-src="img/img7.jpeg"></li>
+                    <li><img alt="" data-src="img/img8.jpeg"></li>
+                    <li><img alt="" data-src="img/img9.jpeg"></li>
+                    <li><img alt="" data-src="img/img10.jpeg"></li>
+                    <li><img alt="" data-src="img/img11.jpeg"></li>
+                    <li><img alt="" data-src="img/img12.jpeg"></li>
+                    <li><img alt="" data-src="img/img13.jpeg"></li>
+                    <li><img alt="" data-src="img/img14.jpeg"></li>
+                    <li><img alt="" data-src="img/img15.jpeg"></li>
+                    <li><img alt="" data-src="img/img16.jpeg"></li>
+                    <li><img alt="" data-src="img/img17.jpeg"></li>
+                    <li><img alt="" data-src="img/img18.jpeg"></li>
+                    <li><img alt="" data-src="img/img19.jpeg"></li>
+                    <li><img alt="" data-src="img/img20.jpeg"></li>
+                    <li><img alt="" data-src="img/img21.jpeg"></li>
+                    <li><img alt="" data-src="img/img22.jpeg"></li>
+                    <li><img alt="" data-src="img/img23.jpeg"></li>
+                    <li><img alt="" data-src="img/img24.jpeg"></li>
+                    <li><img alt="" data-src="img/img25.jpeg"></li>
+                    <li><img alt="" data-src="img/img26.jpeg"></li>
+                    <li><img alt="" data-src="img/img27.jpeg"></li>
+                    <li><img alt="" data-src="img/img28.jpeg"></li>
+                    <li><img alt="" data-src="img/img29.jpeg"></li>
+                    <li><img alt="" data-src="img/img30.jpeg"></li>
+                    <li><img alt="" data-src="img/img31.jpeg"></li>
+                    <li><img alt="" data-src="img/img32.jpeg"></li>
+                    <li><img alt="" data-src="img/img33.jpeg"></li>
+                    <li><img alt="" data-src="img/img34.jpeg"></li>
+                    <li><img alt="" data-src="img/img35.jpeg"></li>
+                    <li><img alt="" data-src="img/img36.jpeg"></li>
+                    <li><img alt="" data-src="img/img37.jpeg"></li>
+                    <li><img alt="" data-src="img/img38.jpeg"></li>        
+        </ul>
+
+        <script type="text/javascript">
+            /*
+             * 图片懒加载的思路
+             * 1、提前给所有图片设置宽和高用来占位
+             * 2、不设置图片的src属性，而是自定义一个data-src属性来存储图片的路径
+             * 3、判断当前屏幕的位置（图片的top值和屏幕底部的值），来进行是否显示
+             * 图片，如果需要显示的话，把data-src的值给src
+             */
+
+            //获取所有图片
+            var imgs = document.querySelectorAll("img");
+
+            //设置滚动事件
+            window.onscroll = lazyloadFn;
+
+            //屏幕的高度
+            var sh = window.innerHeight;
+            console.log(sh);
+
+            //刚进来需要先调用下
+            lazyloadFn();
+
+            //图片懒加载的方法
+            function lazyloadFn () {
+                //获取滚动的距离
+                var st = document.body.scrollTop;
+                //计算滚动中的底部的值
+                var sn = sh + st;
+                //循环所有的图片
+                for (var i = 0; i < imgs.length; i++) {
+                    if (imgs[i].offsetTop <= sn) {
+                        console.log(imgs[i].offsetTop)
+                        console.log(sn)
+                        imgs[i].src = imgs[i].getAttribute("data-src");
+                    }
+                }
+            }
+
+        </script>
+    </body>
+</html>
