@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>监听测试</title>
+</head>
+<script src="plug/socket.io-1.4.5.js"></script>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<body>
+<style>
+    #return li{
+        list-style-type: none;
+        height: 20px;
+        line-height: 20px;
+        font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
+        border-bottom: 1px solid #eeeeee;
+    }
+    #return li span{
+        font-weight: bold;
+        color: #000000;
+        margin-right: 10px;
+    }
+    .emit{
+        color: #0c80ba;
+    }
+    .server{
+        color:#367b36;
+    }
+</style>
+<iframe id="hj" width="500" height="50" src="http://dagaiwan.com"></iframe>
+<button type="button" onclick="test()">ajax</button>
+<script>
+    function test(){
+
+        var iframe = document.getElementById('hj');
+        document.domain = '192.168.1.12';
+        var win = iframe.contentWindow;
+        var doc = win.document;
+        var name = win.name;
+        console.log(doc);
+    }
+</script>
+<h1>测试环境</h1>
+<input type="text" id="info" placeholder="请输入信息" onkeypress="if(event.keyCode == 13){send()}"/>
+<button type="button" onclick="send()">发送</button>
+<ul id="return"></ul>
+<script>
+    var socket = io.connect('http://192.168.1.12:8112');
+    socket.on("message",function(data){
+        $("#return").append('<li class="server"><span>Server:</span>'+ data +'</li>');
+    });
+    socket.on("news",function(data){
+        var jsonDate=eval("("+data+")");
+        $("#return").append('<li class="server"><span>Server:</span>'+ jsonDate.get +'</li>');
+        //新建一个ajax，
+    });
+    function send(){
+        emit = $('#info').val();
+        $("#return").append('<li class="emit"><span>emit:</span>'+ emit +'</li>');
+
+        var win = document.getElementById('hj').contentWindow;
+
+        //x=JSON.stringify(win.document.body)
+        x = win.document.body
+        console.log(x)
+        socket.emit('info',x);
+    }
+</script>
+
+</body>
+</html>

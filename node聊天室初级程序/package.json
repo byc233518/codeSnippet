@@ -1,0 +1,21 @@
+{
+  "name": "wodedaima.com",
+  "version": "0.0.1",
+  "description": "通过HTML5服务器代理本地网络资源",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js &"
+  },
+  "repository": {
+    "type": "git",
+    "url": "no"
+  },
+  "keywords": [
+    "websocket"
+  ],
+  "author": "Wos",
+  "license": "ISC",
+  "devDependencies": {
+    "socket.io": "^1.4.8"
+  }
+}
